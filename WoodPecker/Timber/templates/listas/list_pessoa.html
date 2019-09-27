@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+<!-- Deixa o bloco vazio -->
+{% block header %}
+{% endblock %}
+
+<!-- Bloco Principal -->
+{% block container %}
+
+<div class="container py-5">
+
+    <div class="row mt-5">
+        <div class="col-lg">
+
+            <h3 class="border-bottom">
+                Lista de Pessoas cadastradas
+
+                <a href="{% url 'cadastrar-pessoa' %}" class="float-right btn btn-primary btn-sm">
+                    <i class="fa fa-plus-circle" aria-hidden="true"></i>
+                    Nova Pessoa
+                </a>
+            </h3>
+
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg mt-4">
+
+            <table class="table table-striped">
+
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Data de Nascimento</th>
+                        <th>E-mail</th>
+                        <th>Cidade</th>
+                        <th>Opções</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+                    {% for pessoa in object_list %}
+                    <tr>
+                        <td>{{ pessoa.nome }}</td>
+                        <td>{{ pessoa.nascimento }}</td>
+                        <td>{{ pessoa.email }}</td>
+                        <td>{{ pessoa.cidade }}</td>
+                        <td>
+                            <a href="{% url 'atualizar-pessoa' obj.pk %}" class="btn btn-outline-warning btn-sm">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                            </a>
+
+                            <a href="{% url 'excluir-pessoa' obj.pk %}" class="btn btn-outline-danger btn-sm">
+                                <i class="fa fa-trash" aria-hidden="true"></i>
+                            </a>
+                        </td>
+                    </tr>
+                    {% empty %}
+                    <tr>
+                        <td colspan="100%">Nenhuma pessoa cadastrada</td>
+                    </tr>
+                    {% endfor %}
+
+                </tbody>
+
+            </table>
+
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

@@ -1,0 +1,225 @@
+{% load static %}
+
+<!-- Carregar todas as URLS do projeto pelo nome -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>WoodPecker</title>
+
+  <!-- Bootstrap core CSS -->
+  <link href="{% static 'vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+
+  <!-- Custom fonts for this template -->
+  <link href="https://fonts.googleapis.com/css?family=Catamaran:100,200,300,400,500,600,700,800,900" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+
+  <!-- Custom styles for this template -->
+  <link href="css/business-frontpage.css" rel="stylesheet">
+
+  <!-- Importar o Font Awesome 4.7 -->
+  <link href="{% static 'vendor/font-awesome-4.7.0/css/font-awesome.min.css' %}" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <!-- Navigation -->
+  {% block menu %}
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand" href="{% url 'index' %}">Início</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarResponsive">
+        <ul class="navbar-nav ml-auto">          
+          {% if request.user.is_authenticated %}
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Cadastros
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'cadastrar-estado' %}">Estado</a>
+              <a class="dropdown-item" href="{% url 'cadastrar-cidade' %}">Cidade</a>
+              <a class="dropdown-item" href="{% url 'cadastrar-pessoa' %}">Cliente</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'cadastrar-ferramenta' %}">Ferramenta</a>
+              <a class="dropdown-item" href="{% url 'cadastrar-madeira' %}">Madeira</a>
+              <a class="dropdown-item" href="{% url 'cadastrar-material' %}">Material</a>
+              <a class="dropdown-item" href="{% url 'cadastrar-produto' %}">Produto</a>
+            </div>
+          </li>
+
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+              aria-haspopup="true" aria-expanded="false">
+              Consulta
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="{% url 'listar-estado' %}">Estado</a>
+              <a class="dropdown-item" href="{% url 'listar-cidade' %}">Cidade</a>              
+              <a class="dropdown-item" href="{% url 'listar-pessoa' %}">Cliente</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="{% url 'listar-ferramenta' %}">Ferramenta</a>
+              <a class="dropdown-item" href="{% url 'listar-madeira' %}">Madeira</a>
+              <a class="dropdown-item" href="{% url 'listar-material' %}">Material</a>
+              <a class="dropdown-item" href="{% url 'listar-produto' %}">Produto</a>
+            </div>
+          </li>
+
+          {% endif %}
+
+          <li class="nav-item">
+              <a class="nav-link" href="{% url 'sobre' %}">Sobre</a>
+          </li>
+          <ul class="navbar-nav ml-auto">
+              {% if request.user.is_authenticated %}
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                  aria-haspopup="true" aria-expanded="false">
+                  {{ request.user.username }}
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <a class="dropdown-item" href="#">
+                    <i class="fa fa-key" aria-hidden="true"></i> Alterar senha</a>
+                  <div class="dropdown-divider"></div>
+                  <a class="dropdown-item" href="{% url 'logout' %}">
+                    <i class="fa fa-sign-out" aria-hidden="true"></i> Sair</a>
+                </div>
+              </li>
+              {% else %}
+              <li class="nav-item"> 
+                <a class="nav-link" href="{% url 'login' %}">
+                  <i class="fa fa-sign-in" aria-hidden="true"></i>
+                  Entrar
+                </a>
+              </li>
+              {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+  {% endblock %}
+
+  <!-- Header -->
+  {% block header %}
+  <header class="bg-primary py-5 mb-5">
+    <div class="container h-100">
+      <div class="row h-100 align-items-center">
+        <div class="col-lg-12">
+          <h1 class="display-4 text-white mt-5 mb-2">Marcenaria Web</h1>
+          <p class="lead mb-5 text-white-50">Aos Marceneiros hobistas que sempre querem aprender novas técnicas</p>
+        </div>
+      </div>
+    </div>
+  </header>
+  {% endblock %}
+
+  <!-- Page Content -->
+  {% block container %}
+  <div class="container">
+
+    <div class="row">
+      <div class="col-md-8 mb-5">
+        <h2>O que nós fazemos</h2>
+        <hr>
+        <p>Seja bem vindo ao site dos amantes da madeira. Nele, nós iremos...</p>
+        <p>Compartilhar tudo sobre o ramo da marcenaria amadora, os diferentes tipos de materiais, as ferramentas que auxiliam no trabalho, as técnicas empregadas, as peças produzidas. Tudo bem detalhado para você marceneiro hobista ou amador.</p>
+        <a class="btn btn-primary btn-lg" href="#">Saiba mais &raquo;</a>
+      </div>
+      <div class="col-md-4 mb-5">
+        <h2>Contato</h2>
+        <hr>
+        <address>
+          <strong>RichWood</strong>
+          <br>JD São Jorge
+          <br>Paranavaí - Paraná
+          <br>
+        </address>
+        <address>
+          <abbr title="Phone">Telefone:</abbr>
+          (44) 99123 4567
+          <br>
+          <abbr title="Email">Email:</abbr>
+          <a href="mailto:#">richwood@woodpecker.com</a>
+        </address>
+      </div>
+    </div>
+    <!-- /.row -->
+
+    <div class="row">
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <img class="card-img-top" src="{% static 'imagem/moveis06.jpg' %}" alt="">
+          <div class="card-body">
+            <h4 class="card-title">Criado</h4>
+            <p class="card-text">Este lindo criado deixa qualquer quarto mais aconchegante. Um desing fofo e lindo. Confecionada em chapas de compensado naval e acabamento em verniz marítimo nitrocelulose e pintura eletrostática.</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary">Saiba mais!</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <img class="card-img-top" src="{% static 'imagem/moveis03.jpg' %}" alt="">
+          <div class="card-body">
+            <h4 class="card-title">Mesa de Centro</h4>
+            <p class="card-text">Futurista ou retrô? Não da para definir não é mesmo? Esta mesa de centro incrível transforma qualquer sala em um ambiente único. Confecionada em chapas de compensado naval e acabamento em verniz marítimo nitrocelulose e pintura eletrostática.</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary">Saiba mais!</a>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-4 mb-5">
+        <div class="card h-100">
+          <img class="card-img-top" src="{% static 'imagem/moveis11.jpg' %}" alt="">
+          <div class="card-body">
+            <h4 class="card-title">Aparador Buffet</h4>
+            <p class="card-text">Com visual retrô, este aparador confere ao ambiente um visual retrô com toques de modernidade. Confecionada em chapas de compensado naval e acabamento em verniz marítimo nitrocelulose e pintura eletrostática.</p>
+          </div>
+          <div class="card-footer">
+            <a href="#" class="btn btn-primary">Saiba mais!</a>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- /.row -->
+    {% endblock %}
+
+  </div>
+  <!-- /.container -->
+
+  <!-- Footer -->
+  {% block footer %}
+  <footer class="py-5 bg-dark">
+    <div class="container">
+      <p class="m-0 text-center text-white">Copyright &copy; WoodPecker.Inc</p>
+    </div>
+    <!-- /.container -->
+  </footer>
+  {% endblock %}
+
+  <!-- Bootstrap core JavaScript -->
+  <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>
+  <script src="{% static 'vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'vendor/jquery/jquery.mask.js' %}"></script>
+
+  {% block script %} 
+  {% endblock %}
+
+</body>
+
+</html>
